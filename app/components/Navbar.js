@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Button from "./Button";
 import { useWindowScroll } from "react-use";
-import { TiLocationArrow, TiVolume, TiVolumeMute } from "react-icons/ti";
+import { TiLocationArrow } from "react-icons/ti";
 import gsap from "gsap";
 
 const navitems = ["Nexus", "Vault", "Prologue", "About", "Contact"];
@@ -12,7 +12,6 @@ const Navbar = () => {
   const { y: currentScrollY } = useWindowScroll();
   const [isNavVisible, setisNavVisible] = useState(true);
   const [lastScrollY, setlastScrollY] = useState(0);
-  const [isMuted, setIsMuted] = useState(true); // Mute state
 
   useEffect(() => {
     if (currentScrollY === 0) {
@@ -35,18 +34,6 @@ const Navbar = () => {
       duration: 0.2,
     });
   }, [isNavVisible]);
-
-  // Broadcast mute toggle to all videos
-  useEffect(() => {
-    const videos = document.querySelectorAll("video");
-    videos.forEach((video) => {
-      video.muted = isMuted;
-    });
-  }, [isMuted]);
-
-  const toggleMute = () => {
-    setIsMuted((prev) => !prev);
-  };
 
   return (
     <div
@@ -77,19 +64,6 @@ const Navbar = () => {
                 </a>
               ))}
             </div>
-
-            {/* Mute/Unmute Button */}
-            <button
-              onClick={toggleMute}
-              className="relative ms-10 font-general text-xs uppercase text-blue-50 after:absolute 
-after:-bottom-0.5 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right 
-after:scale-x-0 after:bg-neutral-800 after:transition-transform after:duration-300 
-after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left 
-hover:after:scale-x-100 dark:after:bg-white cursor-pointer nav-btn-hover"
-              title={isMuted ? "Unmute" : "Mute"}
-            >
-              {isMuted ? <TiVolumeMute size={20} /> : <TiVolume size={20} />}
-            </button>
           </div>
         </nav>
       </header>

@@ -121,7 +121,7 @@ const Hero = () => {
             ref={nextVdRef}
             src={getVideoSrc(currentIndex)}
             loop
-            muted
+            // muted
             id="next-video"
             className="absolute-center invisible absolute z-20 h-[256px] w-[256px] object-cover object-center"
             onLoadedData={handleVideoLoad}
