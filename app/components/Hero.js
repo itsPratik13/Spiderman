@@ -81,6 +81,7 @@ const Hero = () => {
   });
 
   const getVideoSrc = (index) => `videos/spidey-${index}.mp4`;
+  
 
   return (
     <div className="relative h-[100vh] w-screen overflow-x-hidden">
@@ -153,7 +154,7 @@ const Hero = () => {
 
             <Button
               id="watch-trailer"
-              title="Watch trailer"
+              title="Press to Enter"
               leftIcon={<TiLocationArrow />}
               containerClass="bg-yellow-300 flex justify-center items-center gap-1"
             />

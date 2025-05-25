@@ -14,7 +14,7 @@ const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [hasClicked, setHasClicked] = useState(false);
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [loadedVideos, setLoadedVideos] = useState(0);
 
   const totalVideos = 4;
@@ -80,7 +80,7 @@ const Hero = () => {
     });
   });
 
-  const getVideoSrc = (index) => `videos/hero-${index}.mp4`;
+  const getVideoSrc = (index) => `videos/spidey-${index}.mp4`;
 
   return (
     <div className="relative h-[100vh] w-screen overflow-x-hidden">
@@ -143,12 +143,12 @@ const Hero = () => {
 
         <div className="absolute left-0 top-0 z-40 w-full h-full">
           <div className="mt-24 px-5 sm:px-10">
-            <h1 className="special-font uppercase font-black text-5xl sm:right-10 sm:text-7xl">
+            <h1 className="special-font uppercase font-black text-5xl sm:right-10 sm:text-7xl text-blue-100">
               <b>Become</b>
             </h1>
 
             <p className="mb-5 max-w-[16rem] font-robert-regular text-blue-100">
-              Enter the SpdierVerse <br /> 
+             <b> Enter the SPIDER-VERSE </b> <br /> 
             </p>
 
             <Button
@@ -161,9 +161,9 @@ const Hero = () => {
         </div>
       </div>
 
-      <h1 className="special-font font-zentry absolute bottom-5 right-5 text-black">
-        G<b>A</b>MING
-      </h1>
+      {/* <h1 className="special-font font-zentry absolute bottom-5 right-5 text-black"> */}
+      {/* <b> WEBHEAD</b> */}
+      {/* </h1> */}
     </div>
   );
 };

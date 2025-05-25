@@ -1,4 +1,30 @@
 "use client";
+import { useRef, useState } from "react";
+const BentoTilt=({children, className=''})=>{
+  const [transforStyle, settransforStyle] = useState('')
+  const itemRef=useRef()
+  const handleMouseMove=(e)=>{
+    if(!itemRef.current) return;
+
+    const{left,top,width,height}=itemRef.current.getBoundingClientRect();
+    const relativeX=(e.clientX-left)/width
+    const relativeY=(e.clientY-top)/height
+
+    const tiltX=(relativeY-0.5)*5
+    const tiltY=(relativeX-0.5)*-5
+    const newTransform = `perspective(700px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(.95, .95, .95)`;
+     settransforStyle(newTransform)
+  }
+  const handleMouseLeave=()=>{
+     settransforStyle('')
+  }
+  return(
+    <div className={className} ref={itemRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} style={{transform:transforStyle}}>
+      {children}
+    </div>
+  )
+
+}
 const BentoCard = ({ src, title, description }) => {
   return (
     <div className="relative size-full">
@@ -41,41 +67,41 @@ const Features = () => {
           </p>
         </div>
 
-        <div className="border border-white/20 relative mb-7 h-96 w-full overflow-hidden rounded-md md:h[65vh]">
+        <BentoTilt className="border border-white/20 relative mb-7 h-96 w-full overflow-hidden rounded-md md:h[65vh]">
           <BentoCard
-            src="videos/feature-1.mp4"
-            title="Into the Spider-Verse"
-            description="Explore the chaotic beauty of infinite realities — and the many Spider-heroes who swing through them."
+            src="videos/anim2.mp4"
+            title="Peter Parker"
+            description="The original web-slinger, struggling with the responsibilities of being a hero and living a normal life."
           />
-        </div>
+        </BentoTilt>
 
         <div className="grid h-[135vh] grid-cols-2 grid-rows-3 gap-7">
-          <div className="relative border-hsla col-span-2 overflow-hidden rounded-md transition-transform duration-300 ease-out row-span-1 md:col-span-1 md:row-span-2">
+          <BentoTilt className="relative border-hsla col-span-2 overflow-hidden rounded-md transition-transform duration-300 ease-out row-span-1 md:col-span-1 md:row-span-2">
             <BentoCard
-              src="videos/feature-2.mp4"
+              src="videos/miles.mp4"
               title="Miles Morales"
               description="The new kid on the block with big shoes to fill — and an even bigger heart. He's not just another Spider-Man, he's THE Spider-Man."
             />
-          </div>
+          </BentoTilt>
 
-          <div className="relative border-hsla col-span-2 overflow-hidden rounded-md transition-transform duration-300 ease-out row-span-1 ms-32 md:col-span-1 md:ms-0">
+          <BentoTilt className="relative border-hsla col-span-2 overflow-hidden rounded-md transition-transform duration-300 ease-out row-span-1 ms-32 md:col-span-1 md:ms-0">
             <BentoCard
-              src="videos/feature-3.mp4"
+              src="videos/gwen.mp4"
               title="Spider-Gwen"
               description="Graceful, fierce, and full of rhythm — Gwen Stacy fights crime in her own spectacular style."
             />
-          </div>
+          </BentoTilt>
 
-          <div
+          <BentoTilt
             className="relative border-hsla col-span-2 overflow-hidden rounded-md transition-transform 
             duration-300 ease-out me-14 md:col-span-1 md:me-0"
           >
             <BentoCard
-              src="videos/feature-4.mp4"
+              src="videos/spidey-pointing.mp4"
               title="The Multiverse War"
               description="When worlds collide, only the web of destiny can hold the balance. Dive into the chaos of Spideys united."
             />
-          </div>
+          </BentoTilt>
 
           <div className="relative col-span-1 row-span-1 overflow-hidden rounded-md transition-transform duration-300 ease-out">
             <div className="flex size-full flex-col justify-between bg-violet-500 p-5">
@@ -88,7 +114,7 @@ const Features = () => {
 
           <div className="relative col-span-1 row-span-1 overflow-hidden rounded-md transition-transform duration-300 ease-out">
             <video
-              src="videos/feature-5.mp4"
+              src="videos/anim.mp4"
               loop
               muted
               autoPlay
